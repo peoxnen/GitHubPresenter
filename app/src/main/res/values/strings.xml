@@ -9,4 +9,5 @@
     <string name="nav_repositories">Repositories</string>
     <string name="nav_header_title">GitHub Presenter</string>
     <string name="nav_header_subtitle">have fun...</string>
+    <string name="base_url">https://api.github.com</string>
 </resources>

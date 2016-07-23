@@ -12,7 +12,10 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import iview.wsienski.githubpresenter.GitHubPresenterApp;
 import iview.wsienski.githubpresenter.R;
+import iview.wsienski.githubpresenter.di.compontent.ActivityComponent;
+import iview.wsienski.githubpresenter.di.compontent.DaggerActivityComponent;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+
+    private ActivityComponent mComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +42,16 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        mComponent = DaggerActivityComponent.builder()
+                .appComponent(getApp().getAppComponent()).build();
+        mComponent.inject(this);
     }
+
+    protected GitHubPresenterApp getApp() {
+        return (GitHubPresenterApp) getApplicationContext();
+    }
+
 
     @Override
     public void onBackPressed() {
