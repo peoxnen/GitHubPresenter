@@ -4,9 +4,6 @@ Application using GitHub API.
 <h1>Status:</h1>
 Latest application in progress...
 
-<h1>Category:</h1>
-App to Google Play
-
 <h1>Libraries used:</h1>
 <b>View injection</b>
 <ul>
