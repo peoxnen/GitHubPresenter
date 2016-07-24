@@ -1,5 +1,8 @@
 package iview.wsienski.githubpresenter.ui.activity;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +19,7 @@ import iview.wsienski.githubpresenter.GitHubPresenterApp;
 import iview.wsienski.githubpresenter.R;
 import iview.wsienski.githubpresenter.di.compontent.ActivityComponent;
 import iview.wsienski.githubpresenter.di.compontent.DaggerActivityComponent;
+import iview.wsienski.githubpresenter.ui.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -89,13 +93,31 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Fragment fragment = null;
         if (id == R.id.nav_users) {
-            // Handle the camera action
+            fragment = new UserFragment();
         } else if (id == R.id.nav_repositories) {
-
+            fragment = new UserFragment();
+        } else {
+            fragment = new UserFragment();
         }
+        setContent(fragment, false);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * Zmienia zawartość strony na zadany Fragment.
+     *
+     * @param fragment fragment, który ma zostać dodany w miejsce bieżącej zawartości
+     */
+    public void setContent(Fragment fragment, boolean addToBackStack) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction trans = fragmentManager.beginTransaction();
+        trans.replace(R.id.fragment_container, fragment);
+        if (addToBackStack)
+            trans.addToBackStack(null);
+        trans.commit();
+
     }
 }
