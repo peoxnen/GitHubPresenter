@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,6 +44,7 @@ public class UserFragment extends Fragment implements UsersView{
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
     UserCardAdapter userCardAdapter;
+    private List<User> users = new ArrayList<>();
 
     @Nullable
     @Override
@@ -55,6 +57,8 @@ public class UserFragment extends Fragment implements UsersView{
         usersPresenter.attachView(this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        userCardAdapter = new UserCardAdapter(getActivity(), users);
+        recyclerView.setAdapter(userCardAdapter);
         usersPresenter.loadUsers();
         return view;
     }
@@ -69,10 +73,8 @@ public class UserFragment extends Fragment implements UsersView{
     @Override
     public void showUserList(List<User> userList) {
         Timber.d("showUserList");
-        if(userCardAdapter==null) {
-            userCardAdapter = new UserCardAdapter(userList);
-            recyclerView.setAdapter(userCardAdapter);
-        }
+        users.addAll(userList);
+        userCardAdapter.notifyDataSetChanged();
     }
 
     @Override

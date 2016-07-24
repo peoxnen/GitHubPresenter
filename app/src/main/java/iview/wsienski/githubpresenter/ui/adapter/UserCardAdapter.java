@@ -1,11 +1,14 @@
 package iview.wsienski.githubpresenter.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,9 +22,11 @@ import iview.wsienski.githubpresenter.data.remote.model.User;
  */
 public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHolder> {
 
+    Context context;
     List<User> userList;
 
-    public UserCardAdapter(List<User> userList) {
+    public UserCardAdapter(Context context, List<User> userList) {
+        this.context = context;
         this.userList = userList;
     }
 
@@ -34,7 +39,9 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(UserCardAdapter.ViewHolder holder, int position) {
-        holder.getName().setText(userList.get(position).getLogin());
+        User user = userList.get(position);
+        holder.getName().setText(user.getLogin());
+        Picasso.with(context).load(user.getAvatar_url()).into(holder.getImageView());
         //holder.getImageView().setImageDrawable(drawable);
     }
 
