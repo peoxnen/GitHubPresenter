@@ -6,12 +6,15 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import iview.wsienski.githubpresenter.R;
 import iview.wsienski.githubpresenter.data.remote.model.User;
 import iview.wsienski.githubpresenter.di.compontent.DaggerFragmentCompontent;
@@ -31,11 +34,14 @@ public class UserFragment extends Fragment implements UsersView{
     UsersPresenterImpl usersPresenter;
     FragmentCompontent fragmentCompontent;
     View view;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_users, container, false);
+        ButterKnife.bind(this, view);
         fragmentCompontent = DaggerFragmentCompontent.builder()
                 .activityComponent(((MainActivity)getActivity()).getActivityCompontent()).build();
         fragmentCompontent.inject(this);
@@ -47,6 +53,8 @@ public class UserFragment extends Fragment implements UsersView{
     @Override
     public void showProgress(boolean show) {
         Timber.d("showProgress");
+        int visible = show ? View.VISIBLE : View.GONE;
+        progressBar.setVisibility(visible);
     }
 
     @Override

@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity
         activityComponent = DaggerActivityComponent.builder()
                 .appComponent(getApp().getAppComponent()).build();
         activityComponent.inject(this);
+
+        if (savedInstanceState == null) {
+            setContent(new UserFragment() ,false);
+        }
     }
 
     protected GitHubPresenterApp getApp() {
