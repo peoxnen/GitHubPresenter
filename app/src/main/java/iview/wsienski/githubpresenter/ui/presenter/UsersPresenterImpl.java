@@ -11,6 +11,7 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by Witold Sienski on 24.07.2016.
@@ -29,6 +30,7 @@ public class UsersPresenterImpl implements UsersPresenter {
 
     @Override
     public void loadUsers() {
+        Timber.d("loadUsers");
         subscription = apiService.listUsers(5).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<User>>() {

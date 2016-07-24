@@ -1,7 +1,5 @@
 package iview.wsienski.githubpresenter.di.module;
 
-import android.support.design.BuildConfig;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -9,6 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import iview.wsienski.githubpresenter.BuildConfig;
 import iview.wsienski.githubpresenter.network.APIService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

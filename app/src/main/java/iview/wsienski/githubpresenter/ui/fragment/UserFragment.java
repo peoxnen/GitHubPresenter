@@ -19,6 +19,7 @@ import iview.wsienski.githubpresenter.di.compontent.FragmentCompontent;
 import iview.wsienski.githubpresenter.ui.activity.MainActivity;
 import iview.wsienski.githubpresenter.ui.presenter.UsersPresenterImpl;
 import iview.wsienski.githubpresenter.ui.view.UsersView;
+import timber.log.Timber;
 
 /**
  * Created by Witold Sienski on 24.07.2016.
@@ -28,7 +29,7 @@ public class UserFragment extends Fragment implements UsersView{
     private static final String TAG = UserFragment.class.getSimpleName();
     @Inject
     UsersPresenterImpl usersPresenter;
-    private FragmentCompontent fragmentCompontent;
+    FragmentCompontent fragmentCompontent;
     View view;
 
     @Nullable
@@ -45,16 +46,17 @@ public class UserFragment extends Fragment implements UsersView{
 
     @Override
     public void showProgress(boolean show) {
-
+        Timber.d("showProgress");
     }
 
     @Override
     public void showUserList(List<User> userList) {
-
+        Timber.d("showUserList");
     }
 
     @Override
     public void showError(String message) {
+        Timber.d("showError");
         Toast.makeText(getActivity(), "message "+message,
                 Toast.LENGTH_LONG).show();
     }
