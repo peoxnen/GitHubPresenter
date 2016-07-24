@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    private ActivityComponent mComponent;
+    private ActivityComponent activityComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        mComponent = DaggerActivityComponent.builder()
+        activityComponent = DaggerActivityComponent.builder()
                 .appComponent(getApp().getAppComponent()).build();
-        mComponent.inject(this);
+        activityComponent.inject(this);
     }
 
     protected GitHubPresenterApp getApp() {
@@ -119,5 +119,9 @@ public class MainActivity extends AppCompatActivity
             trans.addToBackStack(null);
         trans.commit();
 
+    }
+
+    public ActivityComponent getActivityCompontent() {
+        return activityComponent;
     }
 }
