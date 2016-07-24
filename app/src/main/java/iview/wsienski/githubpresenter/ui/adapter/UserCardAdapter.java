@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import iview.wsienski.githubpresenter.R;
 import iview.wsienski.githubpresenter.data.remote.model.User;
+import iview.wsienski.githubpresenter.util.Utility;
 
 /**
  * Created by Witold Sienski on 24.07.2016.
@@ -39,11 +41,18 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(UserCardAdapter.ViewHolder holder, int position) {
-        User user = userList.get(position);
+        final User user = userList.get(position);
         holder.getTitle().setText(user.getLogin());
         holder.getDesc().setText(user.getHtml_url());
-        Picasso.with(context).load(user.getAvatar_url()).into(holder.getImageView());
-        //holder.getImageView().setImageDrawable(drawable);
+        holder.getRightIcon().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.openBrowser(context, user.getHtml_url());
+            }
+        });
+        Picasso.with(context).load(user.getAvatar_url()).into(holder.getAvatar());
+
+        //holder.getAvatar().setImageDrawable(drawable);
     }
 
     @Override
@@ -57,8 +66,10 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
         TextView title;
         @BindView(R.id.desc)
         TextView desc;
-        @BindView(R.id.imageView)
-        ImageView imageView;
+        @BindView(R.id.avatar)
+        ImageView avatar;
+        @BindView(R.id.right_icon)
+        ImageView rightIcon;
 
         private CardView cardView;
 
@@ -84,12 +95,12 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
             this.desc = desc;
         }
 
-        public ImageView getImageView() {
-            return imageView;
+        public ImageView getAvatar() {
+            return avatar;
         }
 
-        public void setImageView(ImageView imageView) {
-            this.imageView = imageView;
+        public void setAvatar(ImageView avatar) {
+            this.avatar = avatar;
         }
 
         public TextView getTitle() {
@@ -98,6 +109,14 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
 
         public void setTitle(TextView title) {
             this.title = title;
+        }
+
+        public ImageView getRightIcon() {
+            return rightIcon;
+        }
+
+        public void setRightIcon(ImageView rightIcon) {
+            this.rightIcon = rightIcon;
         }
     }
 }
