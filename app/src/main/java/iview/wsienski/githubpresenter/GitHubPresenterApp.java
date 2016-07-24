@@ -30,4 +30,5 @@ public class GitHubPresenterApp extends Application {
     public AppComponent getAppComponent() {
         return appComponent;
     }
+
 }

@@ -6,9 +6,9 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import iview.wsienski.githubpresenter.GitHubPresenterApp;
-import iview.wsienski.githubpresenter.data.remote.APIService;
 import iview.wsienski.githubpresenter.di.module.AppModule;
 import iview.wsienski.githubpresenter.di.module.NetModule;
+import iview.wsienski.githubpresenter.network.APIService;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
