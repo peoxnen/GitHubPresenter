@@ -31,7 +31,7 @@ public class UsersPresenterImpl implements UsersPresenter {
     @Override
     public void loadUsers() {
         Timber.d("loadUsers");
-        subscription = apiService.listUsers(5).subscribeOn(Schedulers.newThread())
+        subscription = apiService.listUsers(15).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<User>>() {
 
@@ -49,6 +49,7 @@ public class UsersPresenterImpl implements UsersPresenter {
                     @Override
                     public void onError(Throwable e) {
                         usersView.showError("Error download");
+                        usersView.showProgress(false);
                     }
 
                     @Override

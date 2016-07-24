@@ -10,4 +10,7 @@
     <string name="nav_header_title">GitHub Presenter</string>
     <string name="nav_header_subtitle">have fun...</string>
     <string name="base_url">https://api.github.com</string>
+    <string name="dialog_aplogize_title">I\'m sorry...</string>
+    <string name="dialog_content_connection_error">Connection error.</string>
+    <string name="dialog_button_ok">Ok</string>
 </resources>

@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
 
@@ -65,8 +66,11 @@ public class UserFragment extends Fragment implements UsersView{
     @Override
     public void showError(String message) {
         Timber.d("showError");
-        Toast.makeText(getActivity(), "message "+message,
-                Toast.LENGTH_LONG).show();
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_aplogize_title)
+                .content(message)
+                .negativeText(R.string.dialog_button_ok)
+                .show();
     }
 
     @Override
