@@ -40,7 +40,8 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
     @Override
     public void onBindViewHolder(UserCardAdapter.ViewHolder holder, int position) {
         User user = userList.get(position);
-        holder.getName().setText(user.getLogin());
+        holder.getTitle().setText(user.getLogin());
+        holder.getDesc().setText(user.getHtml_url());
         Picasso.with(context).load(user.getAvatar_url()).into(holder.getImageView());
         //holder.getImageView().setImageDrawable(drawable);
     }
@@ -52,8 +53,10 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.info_text)
-        TextView name;
+        @BindView(R.id.title)
+        TextView title;
+        @BindView(R.id.desc)
+        TextView desc;
         @BindView(R.id.imageView)
         ImageView imageView;
 
@@ -65,12 +68,20 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
             cardView = itemView;
         }
 
-        public TextView getName() {
-            return name;
+        public CardView getCardView() {
+            return cardView;
         }
 
-        public void setName(TextView name) {
-            this.name = name;
+        public void setCardView(CardView cardView) {
+            this.cardView = cardView;
+        }
+
+        public TextView getDesc() {
+            return desc;
+        }
+
+        public void setDesc(TextView desc) {
+            this.desc = desc;
         }
 
         public ImageView getImageView() {
@@ -79,6 +90,14 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
 
         public void setImageView(ImageView imageView) {
             this.imageView = imageView;
+        }
+
+        public TextView getTitle() {
+            return title;
+        }
+
+        public void setTitle(TextView title) {
+            this.title = title;
         }
     }
 }
