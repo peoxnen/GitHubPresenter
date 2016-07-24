@@ -3,6 +3,8 @@ package iview.wsienski.githubpresenter.ui.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import iview.wsienski.githubpresenter.data.remote.model.User;
 import iview.wsienski.githubpresenter.di.compontent.DaggerFragmentCompontent;
 import iview.wsienski.githubpresenter.di.compontent.FragmentCompontent;
 import iview.wsienski.githubpresenter.ui.activity.MainActivity;
+import iview.wsienski.githubpresenter.ui.adapter.UserCardAdapter;
 import iview.wsienski.githubpresenter.ui.presenter.UsersPresenterImpl;
 import iview.wsienski.githubpresenter.ui.view.UsersView;
 import timber.log.Timber;
@@ -37,6 +40,9 @@ public class UserFragment extends Fragment implements UsersView{
     View view;
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+    @BindView(R.id.recycler)
+    RecyclerView recyclerView;
+    UserCardAdapter userCardAdapter;
 
     @Nullable
     @Override
@@ -47,6 +53,8 @@ public class UserFragment extends Fragment implements UsersView{
                 .activityComponent(((MainActivity)getActivity()).getActivityCompontent()).build();
         fragmentCompontent.inject(this);
         usersPresenter.attachView(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
         usersPresenter.loadUsers();
         return view;
     }
@@ -61,6 +69,10 @@ public class UserFragment extends Fragment implements UsersView{
     @Override
     public void showUserList(List<User> userList) {
         Timber.d("showUserList");
+        if(userCardAdapter==null) {
+            userCardAdapter = new UserCardAdapter(userList);
+            recyclerView.setAdapter(userCardAdapter);
+        }
     }
 
     @Override
