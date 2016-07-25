@@ -42,7 +42,7 @@ Latest application in progress...
 <li>cardview-v7:24.1.1</li>
 <li>recyclerview-v7:24.1.1</li>
 </ul>
-<b>Images</b>
+<b>Image</b>
 <ul>
 <li>picasso:2.5.2</li>
 </ul>
